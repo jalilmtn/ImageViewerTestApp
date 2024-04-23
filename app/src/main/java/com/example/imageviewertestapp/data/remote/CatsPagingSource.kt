@@ -21,17 +21,23 @@ class CatsPagingSource @Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Cat> {
         return try {
             val page = params.key ?: 1
-            val response = catApi.getCats(page = page, limit = 10).map { it.toCat() }
+            val response = catApi.getCats(page = page, limit = PAGE_LIMIT).map { it.toCat() }
 
             LoadResult.Page(
                 data = response,
                 prevKey = if (page == 1) null else page.minus(1),
                 nextKey = if (response.isEmpty()) null else page.plus(1),
             )
+
+            //TODO: check error codes from api and handle them properly
         } catch (e: IOException) {
-            LoadResult.Error(e)
+            LoadResult.Error(Throwable("Check your internet connection."))
         } catch (e: HttpException) {
-            LoadResult.Error(e)
+            LoadResult.Error(Throwable("Something went wrong, please try again."))
         }
+    }
+
+    companion object {
+        const val PAGE_LIMIT = 10
     }
 }
