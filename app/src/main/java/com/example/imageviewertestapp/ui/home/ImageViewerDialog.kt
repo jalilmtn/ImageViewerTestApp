@@ -11,8 +11,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -71,19 +69,19 @@ fun ImageViewerDialog(cat: Cat?, fave: (Cat) -> Unit, onDismissRequest: () -> Un
                     ) {
                         CircleIconButton(
                             onclick = { /*TODO*/ },
-                            iconId = R.drawable.chat_ic,
+                            iconId = R.drawable.ic_chat,
                             iconSize = 48.dp
                         )
                         CircleIconButton(
                             onclick = { /*TODO*/ },
-                            iconId = R.drawable.eat_ic,
+                            iconId = R.drawable.ic_eat,
                             iconSize = 48.dp
                         )
                         CircleIconButton(
                             onclick = {
                                 fave.invoke(cat)
                             },
-                            iconId = R.drawable.hurt_ic,
+                            iconId = R.drawable.ic_fav,
                             iconTint = if (isSaved) Color.Red else Color.Unspecified,
                             iconSize = 48.dp
                         )
